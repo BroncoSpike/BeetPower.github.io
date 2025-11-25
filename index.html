@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeetPower - Bebidas Naturales Contra la Anemia</title>
+    <style>
+        :root {
+            --primary: #8B0000;
+            --primary-dark: #660000;
+            --secondary: #FF6B6B;
+            --light: #FFF0F0;
+            --dark: #4A0000;
+            --text: #2C1810;
+            --text-light: #7A5C44;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(139, 0, 0, 0.8), rgba(139, 0, 0, 0.9)), url('https://images.unsplash.com/photo-1570197788417-0e82375c9371?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: var(--dark);
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #FF5252;
+        }
+        
+        .btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--dark);
+        }
+        
+        .games-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+        }
+        
+        .game-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 2rem;
+            width: 300px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .game-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .game-card h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .wheel-container {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+        
+        .wheel {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(
+                #FF5722, #FF9800, #FFC107, #8BC34A, 
+                #4CAF50, #009688, #03A9F4, #2196F3
+            );
+            position: relative;
+            transition: transform 3s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+            transform: rotate(0deg);
+        }
+        
+        .wheel-pointer {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background-color: var(--dark);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            z-index: 10;
+        }
+        
+        .wheel-section {
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            transform-origin: bottom right;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .benefit-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .benefit-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .schedule {
+            background-color: var(--light);
+            padding: 3rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .schedule-table {
+            width: 100%;
+            max-width: 600px;
+            margin: 2rem auto;
+            border-collapse: collapse;
+        }
+        
+        .schedule-table th, .schedule-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .schedule-table th {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .discount-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+        }
+        
+        .modal-content h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .discount-code {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--dark);
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background-color: var(--light);
+            border-radius: 4px;
+            letter-spacing: 3px;
+        }
+        
+        /* Sección de Engagement */
+        .engagement-section {
+            background-color: var(--light);
+        }
+        
+        .engagement-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        
+        .daily-wheel-container {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .daily-wheel-info {
+            margin-bottom: 1.5rem;
+        }
+        
+        .points-display {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+        
+        .content-section {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .video-card {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            text-align: left;
+        }
+        
+        .video-card h4 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .video-card p {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+        
+        .video-placeholder {
+            width: 100%;
+            height: 200px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+        
+        .points-badge {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: var(--dark);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--secondary);
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">BeetPower</div>
+                <ul class="nav-links">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#juegos">Juegos</a></li>
+                    <li><a href="#engagement">Engagement</a></li>
+                    <li><a href="#beneficios">Beneficios</a></li>
+                    <li><a href="#informacion">Información</a></li>
+                    <li><a href="#horario">Horario</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="inicio" class="hero">
+        <div class="container">
+            <h1>BeetPower - Combatiendo la Anemia en el Perú</h1>
+            <p>Bebidas naturales con alto índice de hierro y proteínas para una vida más saludable. Juega y gana descuentos exclusivos.</p>
+            <a href="#juegos" class="btn">Juega y Gana Descuentos</a>
+        </div>
+    </section>
+
+    <section id="juegos">
+        <div class="container">
+            <h2 class="section-title">Juegos Didácticos</h2>
+            <div class="games-container">
+                <div class="game-card">
+                    <div class="game-icon">🎡</div>
+                    <h3>Ruleta de Descuentos</h3>
+                    <p>Gira la ruleta y gana descuentos exclusivos en BeetPower.</p>
+                    <div class="wheel-container">
+                        <div class="wheel-pointer"></div>
+                        <div class="wheel" id="wheel">
+                            <!-- Las secciones se generarán con JavaScript -->
+                        </div>
+                    </div>
+                    <button class="btn" id="spin-btn">Girar Ruleta</button>
+                </div>
+                
+                <div class="game-card">
+                    <div class="game-icon">🧩</div>
+                    <h3>Rompecabezas Saludable</h3>
+                    <p>Completa el rompecabezas y descubre tu descuento especial.</p>
+                    <button class="btn">Jugar Ahora</button>
+                </div>
+                
+                <div class="game-card">
+                    <div class="game-icon">❓</div>
+                    <h3>Trivia Nutricional</h3>
+                    <p>Responde preguntas sobre nutrición y gana premios.</p>
+                    <button class="btn">Comenzar Trivia</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="engagement" class="engagement-section">
+        <div class="container">
+            <h2 class="section-title">Actividades de Engagement</h2>
+            <div class="engagement-container">
+                <div class="daily-wheel-container">
+                    <h3>Ruleta Diaria</h3>
+                    <div class="daily-wheel-info">
+                        <p>Gira la ruleta una vez al día para ganar puntos y premios especiales.</p>
+                        <div class="points-display">Tus puntos: <span id="user-points">0</span></div>
+                    </div>
+                    
+                    <div class="wheel-container">
+                        <div class="wheel-pointer"></div>
+                        <div class="wheel" id="daily-wheel">
+                            <!-- Las secciones se generarán con JavaScript -->
+                        </div>
+                    </div>
+                    <button class="btn" id="daily-spin-btn" disabled>Girar Ruleta</button>
+                    <p id="next-spin-time">Próximo giro disponible en: <span id="countdown">24:00:00</span></p>
+                </div>
+                
+                <div class="content-section">
+                    <h3>Contenido Exclusivo</h3>
+                    <p>Mira estos videos y gana puntos adicionales:</p>
+                    
+                    <div class="video-card">
+                        <h4>Video Informativo: Anemia en el Perú <span class="points-badge">+10 puntos</span></h4>
+                        <p>Aprende sobre las causas, síntomas y prevención de la anemia.</p>
+                        <div class="video-placeholder">
+                            [VIDEO SOBRE ANEMIA - 5:30 min]
+                        </div>
+                        <button class="btn watch-video-btn" data-points="10">Ver Video</button>
+                    </div>
+                    
+                    <div class="video-card">
+                        <h4>Beneficios del Hierro Natural <span class="points-badge">+8 puntos</span></h4>
+                        <p>Descubre por qué el hierro de BeetPower es más efectivo.</p>
+                        <div class="video-placeholder">
+                            [VIDEO INFORMATIVO - 3:45 min]
+                        </div>
+                        <button class="btn watch-video-btn" data-points="8">Ver Video</button>
+                    </div>
+                    
+                    <div class="video-card">
+                        <h4>Testimonios BeetPower <span class="points-badge">+5 puntos</span></h4>
+                        <p>Conoce las experiencias de nuestros clientes.</p>
+                        <div class="video-placeholder">
+                            [VIDEO TESTIMONIOS - 4:10 min]
+                        </div>
+                        <button class="btn watch-video-btn" data-points="5">Ver Video</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="beneficios">
+        <div class="container">
+            <h2 class="section-title">Beneficios de BeetPower</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">🩸</div>
+                    <h3>Alto Contenido de Hierro</h3>
+                    <p>Formulado específicamente para combatir y prevenir la anemia de forma natural.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">💪</div>
+                    <h3>Proteínas Naturales</h3>
+                    <p>Aporta proteínas esenciales para el desarrollo muscular y energía sostenida.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">🌿</div>
+                    <h3>100% Ingredientes Naturales</h3>
+                    <p>Elaborado con remolacha, quinua y otros superfoods peruanos.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">🚫</div>
+                    <h3>Sin Conservantes</h3>
+                    <p>Libre de aditivos artificiales, colorantes y conservantes químicos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="informacion">
+        <div class="container">
+            <h2 class="section-title">Información del Producto</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <h3>¿Qué es BeetPower?</h3>
+                    <p>BeetPower es una bebida natural elaborada con ingredientes peruanos de alta calidad, especialmente formulada para combatir la anemia mediante el aporte natural de hierro y proteínas.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <h3>¿Para quién es ideal?</h3>
+                    <p>Para niños, adolescentes, mujeres embarazadas, adultos mayores y cualquier persona que busque prevenir o combatir la anemia de manera natural y deliciosa.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <h3>Modo de uso</h3>
+                    <p>Consumir una botella diaria. Ideal por las mañanas para empezar el día con energía o después de actividades físicas para la recuperación.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="horario">
+        <div class="container">
+            <h2 class="section-title">Horario Recomendado</h2>
+            <div class="schedule">
+                <p>Para obtener los mejores resultados, te recomendamos consumir BeetPower en estos horarios:</p>
+                
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>Objetivo</th>
+                            <th>Horario Recomendado</th>
+                            <th>Beneficio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Energía Matutina</td>
+                            <td>Mañana (7:00 - 9:00 AM)</td>
+                            <td>Comienza el día con vitalidad</td>
+                        </tr>
+                        <tr>
+                            <td>Prevención Anemia</td>
+                            <td>Con el almuerzo</td>
+                            <td>Mejor absorción de hierro</td>
+                        </tr>
+                        <tr>
+                            <td>Recuperación Física</td>
+                            <td>Después del ejercicio</td>
+                            <td>Repone nutrientes esenciales</td>
+                        </tr>
+                        <tr>
+                            <td>Refuerzo Nocturno</td>
+                            <td>Noche (8:00 - 9:00 PM)</td>
+                            <td>Absorción durante el descanso</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <p>Recuerda que estos son horarios sugeridos. Siempre consulta con un profesional de la salud para un plan personalizado.</p>
+            </div>
+        </div>
+    </section>
+
+    <div id="discount-modal" class="discount-modal">
+        <div class="modal-content">
+            <h2>¡Felicidades!</h2>
+            <p>Has ganado un descuento especial para BeetPower.</p>
+            <div class="discount-code" id="discount-code">BEET20</div>
+            <p>Usa este código al realizar tu compra online.</p>
+            <button class="btn" id="close-modal">Cerrar</button>
+        </div>
+    </div>
+
+    <div id="points-modal" class="discount-modal">
+        <div class="modal-content">
+            <h2>¡Puntos Ganados!</h2>
+            <p>Has recibido <span id="points-earned">0</span> puntos por ver este video.</p>
+            <div class="points-display">Tus puntos totales: <span id="updated-points">0</span></div>
+            <button class="btn" id="close-points-modal">Cerrar</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>BeetPower</h3>
+                    <p>Combatiendo la anemia en el Perú con bebidas naturales ricas en hierro.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <p>Email: info@beetpower.com</p>
+                    <p>Teléfono: +51 987 654 321</p>
+                    <p>Lima, Perú</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Síguenos</h3>
+                    <div class="social-links">
+                        <a href="#">📘</a>
+                        <a href="#">📷</a>
+                        <a href="#">📺</a>
+                    </div>
+                </div>
+            </div>
+            <p>&copy; 2023 BeetPower. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Configuración de la ruleta principal
+        const wheel = document.getElementById('wheel');
+        const spinBtn = document.getElementById('spin-btn');
+        const discountModal = document.getElementById('discount-modal');
+        const discountCode = document.getElementById('discount-code');
+        const closeModal = document.getElementById('close-modal');
+        
+        // Configuración de la ruleta diaria
+        const dailyWheel = document.getElementById('daily-wheel');
+        const dailySpinBtn = document.getElementById('daily-spin-btn');
+        const userPointsDisplay = document.getElementById('user-points');
+        const countdownDisplay = document.getElementById('countdown');
+        
+        // Configuración de videos
+        const watchVideoBtns = document.querySelectorAll('.watch-video-btn');
+        const pointsModal = document.getElementById('points-modal');
+        const pointsEarned = document.getElementById('points-earned');
+        const updatedPoints = document.getElementById('updated-points');
+        const closePointsModal = document.getElementById('close-points-modal');
+        
+        // Descuentos disponibles para la ruleta principal
+        const discounts = [
+            { text: '10% OFF', discount: 'BEET10', probability: 0.4 },
+            { text: '15% OFF', discount: 'BEET15', probability: 0.3 },
+            { text: '20% OFF', discount: 'BEET20', probability: 0.2 },
+            { text: '25% OFF', discount: 'BEET25', probability: 0.1 }
+        ];
+        
+        // Premios disponibles para la ruleta diaria
+        const dailyPrizes = [
+            { text: '5 Puntos', points: 5, probability: 0.4 },
+            { text: '10 Puntos', points: 10, probability: 0.3 },
+            { text: '15 Puntos', points: 15, probability: 0.2 },
+            { text: '20 Puntos', points: 20, probability: 0.1 }
+        ];
+        
+        // Estado del usuario
+        let userPoints = 0;
+        let lastSpinTime = localStorage.getItem('lastSpinTime');
+        let canSpinDaily = false;
+        
+        // Inicialización
+        function init() {
+            createWheelSections();
+            createDailyWheelSections();
+            checkDailySpinAvailability();
+            updatePointsDisplay();
+            
+            // Configurar temporizador para la ruleta diaria
+            setInterval(updateCountdown, 1000);
+        }
+        
+        // Crear secciones de la ruleta principal
+        function createWheelSections() {
+            wheel.innerHTML = '';
+            const totalSections = 8;
+            
+            for (let i = 0; i < totalSections; i++) {
+                const section = document.createElement('div');
+                section.className = 'wheel-section';
+                section.style.transform = `rotate(${i * 45}deg)`;
+                
+                // Asignar descuentos según probabilidad
+                let discountIndex = 0;
+                const random = Math.random();
+                let cumulativeProbability = 0;
+                
+                for (let j = 0; j < discounts.length; j++) {
+                    cumulativeProbability += discounts[j].probability;
+                    if (random <= cumulativeProbability) {
+                        discountIndex = j;
+                        break;
+                    }
+                }
+                
+                section.textContent = discounts[discountIndex].text;
+                section.setAttribute('data-discount', discounts[discountIndex].discount);
+                
+                wheel.appendChild(section);
+            }
+        }
+        
+        // Crear secciones de la ruleta diaria
+        function createDailyWheelSections() {
+            dailyWheel.innerHTML = '';
+            const totalSections = 8;
+            
+            for (let i = 0; i < totalSections; i++) {
+                const section = document.createElement('div');
+                section.className = 'wheel-section';
+                section.style.transform = `rotate(${i * 45}deg)`;
+                
+                // Asignar premios según probabilidad
+                let prizeIndex = 0;
+                const random = Math.random();
+                let cumulativeProbability = 0;
+                
+                for (let j = 0; j < dailyPrizes.length; j++) {
+                    cumulativeProbability += dailyPrizes[j].probability;
+                    if (random <= cumulativeProbability) {
+                        prizeIndex = j;
+                        break;
+                    }
+                }
+                
+                section.textContent = dailyPrizes[prizeIndex].text;
+                section.setAttribute('data-points', dailyPrizes[prizeIndex].points);
+                
+                dailyWheel.appendChild(section);
+            }
+        }
+        
+        // Verificar disponibilidad de giro diario
+        function checkDailySpinAvailability() {
+            const now = new Date().getTime();
+            const oneDay = 24 * 60 * 60 * 1000; // 24 horas en milisegundos
+            
+            if (!lastSpinTime || (now - lastSpinTime) >= oneDay) {
+                canSpinDaily = true;
+                dailySpinBtn.disabled = false;
+                dailySpinBtn.textContent = 'Girar Ruleta';
+            } else {
+                canSpinDaily = false;
+                dailySpinBtn.disabled = true;
+                dailySpinBtn.textContent = 'Ya girado hoy';
+            }
+        }
+        
+        // Actualizar cuenta regresiva
+        function updateCountdown() {
+            if (!lastSpinTime) return;
+            
+            const now = new Date().getTime();
+            const nextSpinTime = parseInt(lastSpinTime) + (24 * 60 * 60 * 1000);
+            const timeLeft = nextSpinTime - now;
+            
+            if (timeLeft <= 0) {
+                checkDailySpinAvailability();
+                return;
+            }
+            
+            const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+            
+            countdownDisplay.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+        // Actualizar visualización de puntos
+        function updatePointsDisplay() {
+            userPointsDisplay.textContent = userPoints;
+        }
+        
+        // Girar la ruleta principal
+        spinBtn.addEventListener('click', () => {
+            // Deshabilitar el botón durante el giro
+            spinBtn.disabled = true;
+            
+            // Calcular un ángulo aleatorio para la ruleta
+            const randomAngle = 1440 + Math.floor(Math.random() * 360); // Mínimo 4 vueltas completas
+            wheel.style.transform = `rotate(${randomAngle}deg)`;
+            
+            // Mostrar el descuento después de que termine la animación
+            setTimeout(() => {
+                // Calcular la sección ganadora
+                const normalizedAngle = randomAngle % 360;
+                const sectionIndex = Math.floor(normalizedAngle / 45);
+                const sections = document.querySelectorAll('#wheel .wheel-section');
+                const winningSection = sections[(8 - sectionIndex) % 8]; // Ajustar por la dirección
+                
+                // Mostrar el modal con el descuento
+                discountCode.textContent = winningSection.getAttribute('data-discount');
+                discountModal.style.display = 'flex';
+                
+                // Rehabilitar el botón
+                spinBtn.disabled = false;
+            }, 3000);
+        });
+        
+        // Girar la ruleta diaria
+        dailySpinBtn.addEventListener('click', () => {
+            if (!canSpinDaily) return;
+            
+            // Deshabilitar el botón durante el giro
+            dailySpinBtn.disabled = true;
+            
+            // Calcular un ángulo aleatorio para la ruleta
+            const randomAngle = 1440 + Math.floor(Math.random() * 360); // Mínimo 4 vueltas completas
+            dailyWheel.style.transform = `rotate(${randomAngle}deg)`;
+            
+            // Guardar el tiempo del último giro
+            lastSpinTime = new Date().getTime();
+            localStorage.setItem('lastSpinTime', lastSpinTime);
+            
+            // Mostrar el premio después de que termine la animación
+            setTimeout(() => {
+                // Calcular la sección ganadora
+                const normalizedAngle = randomAngle % 360;
+                const sectionIndex = Math.floor(normalizedAngle / 45);
+                const sections = document.querySelectorAll('#daily-wheel .wheel-section');
+                const winningSection = sections[(8 - sectionIndex) % 8]; // Ajustar por la dirección
+                
+                // Obtener puntos ganados
+                const pointsWon = parseInt(winningSection.getAttribute('data-points'));
+                userPoints += pointsWon;
+                updatePointsDisplay();
+                
+                // Mostrar mensaje de puntos ganados
+                pointsEarned.textContent = pointsWon;
+                updatedPoints.textContent = userPoints;
+                pointsModal.style.display = 'flex';
+                
+                // Actualizar estado del botón
+                canSpinDaily = false;
+                dailySpinBtn.textContent = 'Ya girado hoy';
+            }, 3000);
+        });
+        
+        // Ver videos y ganar puntos
+        watchVideoBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const points = parseInt(btn.getAttribute('data-points'));
+                userPoints += points;
+                updatePointsDisplay();
+                
+                // Mostrar modal de puntos ganados
+                pointsEarned.textContent = points;
+                updatedPoints.textContent = userPoints;
+                pointsModal.style.display = 'flex';
+                
+                // Cambiar estado del botón
+                btn.textContent = 'Visto';
+                btn.disabled = true;
+            });
+        });
+        
+        // Cerrar modales
+        closeModal.addEventListener('click', () => {
+            discountModal.style.display = 'none';
+        });
+        
+        closePointsModal.addEventListener('click', () => {
+            pointsModal.style.display = 'none';
+        });
+        
+        // Inicializar la aplicación
+        init();
+    </script>
+</body>
+</html>
