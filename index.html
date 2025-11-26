@@ -258,6 +258,75 @@
             text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
         
+        /* Estilos para el rompecabezas */
+        .puzzle-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px;
+            margin: 1rem auto;
+            max-width: 200px;
+        }
+        
+        .puzzle-piece {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .puzzle-piece:hover {
+            transform: scale(1.1);
+        }
+        
+        .puzzle-piece.empty {
+            background-color: #ddd;
+            cursor: default;
+        }
+        
+        /* Estilos para la trivia */
+        .trivia-container {
+            text-align: left;
+            margin: 1rem 0;
+        }
+        
+        .trivia-question {
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+        
+        .trivia-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .trivia-option {
+            padding: 0.5rem;
+            background-color: var(--light);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .trivia-option:hover {
+            background-color: #FFE0E0;
+        }
+        
+        .trivia-option.correct {
+            background-color: #C8E6C9;
+        }
+        
+        .trivia-option.incorrect {
+            background-color: #FFCDD2;
+        }
+        
         .benefits-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -518,8 +587,7 @@
                 </div>
                 <ul class="nav-links">
                     <li><a href="#inicio">Inicio</a></li>
-                    <li><a href="#juegos">Juegos</a></li>
-                    <li><a href="#engagement">Engagement</a></li>
+                    <li><a href="#engagement">Juegos y Premios</a></li>
                     <li><a href="#beneficios">Beneficios</a></li>
                     <li><a href="#informacion">Información</a></li>
                     <li><a href="#horario">Horario</a></li>
@@ -543,18 +611,18 @@
             </div>
             <h1>BeetPower - Combatiendo la Anemia en el Perú</h1>
             <p>Bebidas naturales con alto índice de hierro y proteínas para una vida más saludable. Juega y gana descuentos exclusivos.</p>
-            <a href="#juegos" class="btn">Juega y Gana Descuentos</a>
+            <a href="#engagement" class="btn">Juega y Gana Descuentos</a>
         </div>
     </section>
 
-    <section id="juegos">
+    <section id="engagement" class="engagement-section">
         <div class="container">
-            <h2 class="section-title">Juegos Didácticos</h2>
+            <h2 class="section-title">Juega y Gana Premios</h2>
             <div class="games-container">
                 <div class="game-card">
                     <div class="game-icon">🎡</div>
                     <h3>Ruleta de Descuentos</h3>
-                    <p>Gira la ruleta y gana descuentos exclusivos en BeetPower.</p>
+                    <p>Gira la ruleta y gana descuentos exclusivos para BeetPower.</p>
                     <div class="wheel-container">
                         <div class="wheel-pointer"></div>
                         <div class="wheel" id="wheel">
@@ -568,56 +636,20 @@
                     <div class="game-icon">🧩</div>
                     <h3>Rompecabezas Saludable</h3>
                     <p>Completa el rompecabezas y descubre tu descuento especial.</p>
-                    <button class="btn">Jugar Ahora</button>
+                    <div class="puzzle-container" id="puzzle-container">
+                        <!-- El rompecabezas se generará con JavaScript -->
+                    </div>
+                    <button class="btn" id="puzzle-btn">Jugar Ahora</button>
                 </div>
                 
                 <div class="game-card">
                     <div class="game-icon">❓</div>
                     <h3>Trivia Nutricional</h3>
                     <p>Responde preguntas sobre nutrición y gana premios.</p>
-                    <button class="btn">Comenzar Trivia</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="engagement" class="engagement-section">
-        <div class="container">
-            <h2 class="section-title">Actividades de Engagement</h2>
-            <div class="engagement-container">
-                <div class="daily-wheel-container">
-                    <h3>Ruleta Diaria</h3>
-                    <div class="daily-wheel-info">
-                        <p>Gira la ruleta una vez al día para ganar puntos y premios especiales.</p>
-                        <div class="points-display">Tus puntos: <span id="user-points">0</span></div>
+                    <div class="trivia-container" id="trivia-container">
+                        <!-- La trivia se generará con JavaScript -->
                     </div>
-                    
-                    <div class="wheel-container">
-                        <div class="wheel-pointer"></div>
-                        <div class="wheel" id="daily-wheel">
-                            <!-- Las secciones se generarán con JavaScript -->
-                        </div>
-                    </div>
-                    <button class="btn" id="daily-spin-btn" disabled>Girar Ruleta</button>
-                    <p id="next-spin-time">Próximo giro disponible en: <span id="countdown">24:00:00</span></p>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Contenido Exclusivo</h3>
-                    <p>Mira este video y gana puntos adicionales:</p>
-                    
-                    <div class="video-card">
-                        <h4>Video Informativo: Beneficios del Hierro Natural <span class="points-badge">+10 puntos</span></h4>
-                        <p>Descubre por qué el hierro de BeetPower es más efectivo para combatir la anemia.</p>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/Wzs_GDpt6N4" 
-                                    title="Beneficios del Hierro Natural - BeetPower" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen>
-                            </iframe>
-                        </div>
-                        <button class="btn watch-video-btn" data-points="10">Ver Video</button>
-                    </div>
+                    <button class="btn" id="trivia-btn">Comenzar Trivia</button>
                 </div>
             </div>
         </div>
@@ -746,7 +778,7 @@
     <div id="points-modal" class="discount-modal">
         <div class="modal-content">
             <h2>¡Puntos Ganados!</h2>
-            <p>Has recibido <span id="points-earned">0</span> puntos por ver este video.</p>
+            <p>Has recibido <span id="points-earned">0</span> puntos por completar esta actividad.</p>
             <div class="points-display">Tus puntos totales: <span id="updated-points">0</span></div>
             <button class="btn" id="close-points-modal">Cerrar</button>
         </div>
@@ -766,7 +798,7 @@
                 <div class="footer-section">
                     <h3>Contacto</h3>
                     <p>Email: info@beetpower.com</p>
-                    <p>Teléfono: +51 987 654 321</p>
+                    <p>Teléfono: 975 733 554</p>
                     <p>Lima, Perú</p>
                 </div>
                 
@@ -789,20 +821,21 @@
         const discountCode = document.getElementById('discount-code');
         const closeModal = document.getElementById('close-modal');
         
-        // Configuración de la ruleta diaria
-        const dailyWheel = document.getElementById('daily-wheel');
-        const dailySpinBtn = document.getElementById('daily-spin-btn');
-        const userPointsDisplay = document.getElementById('user-points');
-        const countdownDisplay = document.getElementById('countdown');
+        // Configuración del rompecabezas
+        const puzzleContainer = document.getElementById('puzzle-container');
+        const puzzleBtn = document.getElementById('puzzle-btn');
         
-        // Configuración de videos
-        const watchVideoBtns = document.querySelectorAll('.watch-video-btn');
+        // Configuración de la trivia
+        const triviaContainer = document.getElementById('trivia-container');
+        const triviaBtn = document.getElementById('trivia-btn');
+        
+        // Configuración de puntos
         const pointsModal = document.getElementById('points-modal');
         const pointsEarned = document.getElementById('points-earned');
         const updatedPoints = document.getElementById('updated-points');
         const closePointsModal = document.getElementById('close-points-modal');
         
-        // Descuentos disponibles para la ruleta principal (más realistas)
+        // Descuentos disponibles para la ruleta principal
         const discounts = [
             { text: '5% OFF', discount: 'BEET5', probability: 0.4 },
             { text: '10% OFF', discount: 'BEET10', probability: 0.3 },
@@ -810,28 +843,17 @@
             { text: '20% OFF', discount: 'BEET20', probability: 0.1 }
         ];
         
-        // Premios disponibles para la ruleta diaria (más realistas)
-        const dailyPrizes = [
-            { text: '2 Puntos', points: 2, probability: 0.4 },
-            { text: '3 Puntos', points: 3, probability: 0.3 },
-            { text: '5 Puntos', points: 5, probability: 0.2 },
-            { text: '8 Puntos', points: 8, probability: 0.1 }
-        ];
-        
         // Estado del usuario
         let userPoints = 0;
-        let lastSpinTime = localStorage.getItem('lastSpinTime');
-        let canSpinDaily = false;
+        let puzzleSolved = false;
+        let triviaCompleted = false;
         
         // Inicialización
         function init() {
             createWheelSections();
-            createDailyWheelSections();
-            checkDailySpinAvailability();
+            setupPuzzle();
+            setupTrivia();
             updatePointsDisplay();
-            
-            // Configurar temporizador para la ruleta diaria
-            setInterval(updateCountdown, 1000);
         }
         
         // Crear secciones de la ruleta principal
@@ -864,75 +886,193 @@
             }
         }
         
-        // Crear secciones de la ruleta diaria
-        function createDailyWheelSections() {
-            dailyWheel.innerHTML = '';
-            const totalSections = 8;
+        // Configurar el rompecabezas
+        function setupPuzzle() {
+            const puzzlePieces = [1, 2, 3, 4, 5, 6, 7, 8, ''];
+            shuffleArray(puzzlePieces);
             
-            for (let i = 0; i < totalSections; i++) {
-                const section = document.createElement('div');
-                section.className = 'wheel-section';
-                section.style.transform = `rotate(${i * 45}deg)`;
+            puzzleContainer.innerHTML = '';
+            puzzlePieces.forEach((piece, index) => {
+                const pieceElement = document.createElement('div');
+                pieceElement.className = `puzzle-piece ${piece === '' ? 'empty' : ''}`;
+                pieceElement.textContent = piece;
+                pieceElement.dataset.index = index;
+                pieceElement.dataset.value = piece;
                 
-                // Asignar premios según probabilidad
-                let prizeIndex = 0;
-                const random = Math.random();
-                let cumulativeProbability = 0;
-                
-                for (let j = 0; j < dailyPrizes.length; j++) {
-                    cumulativeProbability += dailyPrizes[j].probability;
-                    if (random <= cumulativeProbability) {
-                        prizeIndex = j;
-                        break;
-                    }
+                if (piece !== '') {
+                    pieceElement.addEventListener('click', movePuzzlePiece);
                 }
                 
-                section.textContent = dailyPrizes[prizeIndex].text;
-                section.setAttribute('data-points', dailyPrizes[prizeIndex].points);
+                puzzleContainer.appendChild(pieceElement);
+            });
+            
+            puzzleBtn.textContent = 'Resolver Rompecabezas';
+            puzzleBtn.disabled = false;
+            puzzleSolved = false;
+        }
+        
+        // Mover pieza del rompecabezas
+        function movePuzzlePiece(event) {
+            const clickedIndex = parseInt(event.target.dataset.index);
+            const emptyIndex = findEmptyIndex();
+            
+            if (isAdjacent(clickedIndex, emptyIndex)) {
+                // Intercambiar piezas
+                const pieces = Array.from(puzzleContainer.children);
+                const temp = pieces[clickedIndex].textContent;
+                pieces[clickedIndex].textContent = pieces[emptyIndex].textContent;
+                pieces[emptyIndex].textContent = temp;
                 
-                dailyWheel.appendChild(section);
+                // Actualizar clases
+                pieces[clickedIndex].classList.toggle('empty', pieces[clickedIndex].textContent === '');
+                pieces[emptyIndex].classList.toggle('empty', pieces[emptyIndex].textContent === '');
+                
+                // Verificar si el rompecabezas está resuelto
+                if (checkPuzzleSolved()) {
+                    puzzleSolved = true;
+                    puzzleBtn.textContent = '¡Completado!';
+                    puzzleBtn.disabled = true;
+                    awardPoints(15, 'rompecabezas');
+                }
             }
         }
         
-        // Verificar disponibilidad de giro diario
-        function checkDailySpinAvailability() {
-            const now = new Date().getTime();
-            const oneDay = 24 * 60 * 60 * 1000; // 24 horas en milisegundos
+        // Encontrar índice vacío
+        function findEmptyIndex() {
+            const pieces = Array.from(puzzleContainer.children);
+            for (let i = 0; i < pieces.length; i++) {
+                if (pieces[i].textContent === '') return i;
+            }
+            return -1;
+        }
+        
+        // Verificar si las piezas son adyacentes
+        function isAdjacent(index1, index2) {
+            const row1 = Math.floor(index1 / 3);
+            const col1 = index1 % 3;
+            const row2 = Math.floor(index2 / 3);
+            const col2 = index2 % 3;
             
-            if (!lastSpinTime || (now - lastSpinTime) >= oneDay) {
-                canSpinDaily = true;
-                dailySpinBtn.disabled = false;
-                dailySpinBtn.textContent = 'Girar Ruleta';
-            } else {
-                canSpinDaily = false;
-                dailySpinBtn.disabled = true;
-                dailySpinBtn.textContent = 'Ya girado hoy';
+            return (Math.abs(row1 - row2) === 1 && col1 === col2) || 
+                   (Math.abs(col1 - col2) === 1 && row1 === row2);
+        }
+        
+        // Verificar si el rompecabezas está resuelto
+        function checkPuzzleSolved() {
+            const pieces = Array.from(puzzleContainer.children);
+            for (let i = 0; i < pieces.length - 1; i++) {
+                if (parseInt(pieces[i].textContent) !== i + 1) return false;
+            }
+            return pieces[pieces.length - 1].textContent === '';
+        }
+        
+        // Configurar trivia
+        function setupTrivia() {
+            const questions = [
+                {
+                    question: "¿Qué mineral es esencial para combatir la anemia?",
+                    options: ["Calcio", "Hierro", "Potasio", "Magnesio"],
+                    correct: 1
+                },
+                {
+                    question: "¿Qué alimento es rico en hierro natural?",
+                    options: ["Remolacha", "Papa", "Zanahoria", "Cebolla"],
+                    correct: 0
+                },
+                {
+                    question: "¿Cuánta BeetPower se recomienda consumir diariamente?",
+                    options: ["2 litros", "500 ml", "1 botella", "3 botellas"],
+                    correct: 2
+                }
+            ];
+            
+            triviaContainer.innerHTML = '';
+            
+            questions.forEach((q, index) => {
+                const questionElement = document.createElement('div');
+                questionElement.className = 'trivia-question';
+                questionElement.textContent = `${index + 1}. ${q.question}`;
+                triviaContainer.appendChild(questionElement);
+                
+                const optionsElement = document.createElement('div');
+                optionsElement.className = 'trivia-options';
+                
+                q.options.forEach((option, optIndex) => {
+                    const optionElement = document.createElement('div');
+                    optionElement.className = 'trivia-option';
+                    optionElement.textContent = option;
+                    optionElement.dataset.questionIndex = index;
+                    optionElement.dataset.optionIndex = optIndex;
+                    optionElement.addEventListener('click', checkTriviaAnswer);
+                    optionsElement.appendChild(optionElement);
+                });
+                
+                triviaContainer.appendChild(optionsElement);
+            });
+            
+            triviaBtn.textContent = 'Comenzar Trivia';
+            triviaBtn.disabled = false;
+            triviaCompleted = false;
+        }
+        
+        // Verificar respuesta de trivia
+        function checkTriviaAnswer(event) {
+            const questionIndex = parseInt(event.target.dataset.questionIndex);
+            const optionIndex = parseInt(event.target.dataset.optionIndex);
+            const questions = [
+                { correct: 1 },
+                { correct: 0 },
+                { correct: 2 }
+            ];
+            
+            const options = event.target.parentElement.children;
+            
+            // Marcar todas las opciones
+            for (let i = 0; i < options.length; i++) {
+                options[i].classList.remove('correct', 'incorrect');
+                if (i === questions[questionIndex].correct) {
+                    options[i].classList.add('correct');
+                } else if (i === optionIndex) {
+                    options[i].classList.add('incorrect');
+                }
+            }
+            
+            // Verificar si todas las preguntas están respondidas
+            checkTriviaCompletion();
+        }
+        
+        // Verificar si la trivia está completa
+        function checkTriviaCompletion() {
+            const allOptions = triviaContainer.querySelectorAll('.trivia-option');
+            let answeredCount = 0;
+            
+            allOptions.forEach(option => {
+                if (option.classList.contains('correct') || option.classList.contains('incorrect')) {
+                    answeredCount++;
+                }
+            });
+            
+            if (answeredCount === allOptions.length && !triviaCompleted) {
+                triviaCompleted = true;
+                triviaBtn.textContent = '¡Trivia Completada!';
+                triviaBtn.disabled = true;
+                awardPoints(20, 'trivia');
             }
         }
         
-        // Actualizar cuenta regresiva
-        function updateCountdown() {
-            if (!lastSpinTime) return;
+        // Otorgar puntos
+        function awardPoints(points, activity) {
+            userPoints += points;
+            updatePointsDisplay();
             
-            const now = new Date().getTime();
-            const nextSpinTime = parseInt(lastSpinTime) + (24 * 60 * 60 * 1000);
-            const timeLeft = nextSpinTime - now;
-            
-            if (timeLeft <= 0) {
-                checkDailySpinAvailability();
-                return;
-            }
-            
-            const hours = Math.floor(timeLeft / (1000 * 60 * 60));
-            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-            
-            countdownDisplay.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            pointsEarned.textContent = points;
+            updatedPoints.textContent = userPoints;
+            pointsModal.style.display = 'flex';
         }
         
         // Actualizar visualización de puntos
         function updatePointsDisplay() {
-            userPointsDisplay.textContent = userPoints;
+            // Solo para mostrar puntos si se implementa sistema de puntos
         }
         
         // Girar la ruleta principal
@@ -961,61 +1101,18 @@
             }, 3000);
         });
         
-        // Girar la ruleta diaria
-        dailySpinBtn.addEventListener('click', () => {
-            if (!canSpinDaily) return;
-            
-            // Deshabilitar el botón durante el giro
-            dailySpinBtn.disabled = true;
-            
-            // Calcular un ángulo aleatorio para la ruleta
-            const randomAngle = 1440 + Math.floor(Math.random() * 360); // Mínimo 4 vueltas completas
-            dailyWheel.style.transform = `rotate(${randomAngle}deg)`;
-            
-            // Guardar el tiempo del último giro
-            lastSpinTime = new Date().getTime();
-            localStorage.setItem('lastSpinTime', lastSpinTime);
-            
-            // Mostrar el premio después de que termine la animación
-            setTimeout(() => {
-                // Calcular la sección ganadora
-                const normalizedAngle = randomAngle % 360;
-                const sectionIndex = Math.floor(normalizedAngle / 45);
-                const sections = document.querySelectorAll('#daily-wheel .wheel-section');
-                const winningSection = sections[(8 - sectionIndex) % 8]; // Ajustar por la dirección
-                
-                // Obtener puntos ganados
-                const pointsWon = parseInt(winningSection.getAttribute('data-points'));
-                userPoints += pointsWon;
-                updatePointsDisplay();
-                
-                // Mostrar mensaje de puntos ganados
-                pointsEarned.textContent = pointsWon;
-                updatedPoints.textContent = userPoints;
-                pointsModal.style.display = 'flex';
-                
-                // Actualizar estado del botón
-                canSpinDaily = false;
-                dailySpinBtn.textContent = 'Ya girado hoy';
-            }, 3000);
+        // Reiniciar rompecabezas
+        puzzleBtn.addEventListener('click', () => {
+            if (!puzzleSolved) {
+                setupPuzzle();
+            }
         });
         
-        // Ver videos y ganar puntos
-        watchVideoBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const points = parseInt(btn.getAttribute('data-points'));
-                userPoints += points;
-                updatePointsDisplay();
-                
-                // Mostrar modal de puntos ganados
-                pointsEarned.textContent = points;
-                updatedPoints.textContent = userPoints;
-                pointsModal.style.display = 'flex';
-                
-                // Cambiar estado del botón
-                btn.textContent = 'Visto';
-                btn.disabled = true;
-            });
+        // Reiniciar trivia
+        triviaBtn.addEventListener('click', () => {
+            if (!triviaCompleted) {
+                setupTrivia();
+            }
         });
         
         // Cerrar modales
@@ -1026,6 +1123,15 @@
         closePointsModal.addEventListener('click', () => {
             pointsModal.style.display = 'none';
         });
+        
+        // Función para mezclar array (para el rompecabezas)
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
         
         // Inicializar la aplicación
         init();
