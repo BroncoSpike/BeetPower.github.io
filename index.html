@@ -54,6 +54,18 @@
             font-size: 1.8rem;
             font-weight: bold;
             color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-badge {
+            background: white;
+            color: var(--primary);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
         }
         
         .nav-links {
@@ -83,10 +95,51 @@
             color: white;
             padding: 5rem 0;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-logo {
+            max-width: 300px;
+            margin: 0 auto 2rem;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .hero-logo-content {
+            text-align: center;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .hero-logo-top {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .hero-logo-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin: 10px 0;
+            color: var(--primary);
+        }
+        
+        .hero-logo-subtitle {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+        
+        .hero-logo-details {
+            font-size: 0.7rem;
+            color: var(--text-light);
         }
         
         .hero h1 {
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin-bottom: 1rem;
         }
         
@@ -347,16 +400,17 @@
             color: var(--text-light);
         }
         
-        .video-placeholder {
+        .video-container {
             width: 100%;
-            height: 200px;
-            background-color: #f0f0f0;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            height: 315px;
             margin-bottom: 1rem;
-            color: var(--text-light);
+        }
+        
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            border: none;
         }
         
         .points-badge {
@@ -406,10 +460,24 @@
             color: white;
             font-size: 1.5rem;
             transition: color 0.3s;
+            text-decoration: none;
         }
         
         .social-links a:hover {
             color: var(--secondary);
+        }
+        
+        .qr-section {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .qr-code {
+            border: 3px solid var(--primary);
+            border-radius: 10px;
+            padding: 10px;
+            background: white;
+            display: inline-block;
         }
         
         @media (max-width: 768px) {
@@ -424,6 +492,19 @@
             .hero p {
                 font-size: 1rem;
             }
+            
+            .hero-logo {
+                max-width: 250px;
+                padding: 15px;
+            }
+            
+            .hero-logo-title {
+                font-size: 2rem;
+            }
+            
+            .video-container {
+                height: 250px;
+            }
         }
     </style>
 </head>
@@ -431,7 +512,10 @@
     <header>
         <div class="container">
             <nav>
-                <div class="logo">BeetPower</div>
+                <div class="logo">
+                    <span>BeetPower</span>
+                    <div class="logo-badge">100% Natural</div>
+                </div>
                 <ul class="nav-links">
                     <li><a href="#inicio">Inicio</a></li>
                     <li><a href="#juegos">Juegos</a></li>
@@ -446,6 +530,17 @@
 
     <section id="inicio" class="hero">
         <div class="container">
+            <div class="hero-logo">
+                <div class="hero-logo-content">
+                    <div class="hero-logo-top">
+                        <span>SIN PRESERVANTES</span>
+                        <span>100% NATURAL</span>
+                    </div>
+                    <div class="hero-logo-title">Beet POWER</div>
+                    <div class="hero-logo-subtitle">300 mL</div>
+                    <div class="hero-logo-details">CHICHA DE BETERRAGA<br>CON CANELA, PIÑA ANIS Y LIMÓN</div>
+                </div>
+            </div>
             <h1>BeetPower - Combatiendo la Anemia en el Perú</h1>
             <p>Bebidas naturales con alto índice de hierro y proteínas para una vida más saludable. Juega y gana descuentos exclusivos.</p>
             <a href="#juegos" class="btn">Juega y Gana Descuentos</a>
@@ -509,35 +604,35 @@
                 
                 <div class="content-section">
                     <h3>Contenido Exclusivo</h3>
-                    <p>Mira estos videos y gana puntos adicionales:</p>
+                    <p>Mira este video y gana puntos adicionales:</p>
                     
                     <div class="video-card">
-                        <h4>Video Informativo: Anemia en el Perú <span class="points-badge">+10 puntos</span></h4>
-                        <p>Aprende sobre las causas, síntomas y prevención de la anemia.</p>
-                        <div class="video-placeholder">
-                            [VIDEO SOBRE ANEMIA - 5:30 min]
+                        <h4>Video Informativo: Beneficios del Hierro Natural <span class="points-badge">+10 puntos</span></h4>
+                        <p>Descubre por qué el hierro de BeetPower es más efectivo para combatir la anemia.</p>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/Wzs_GDpt6N4" 
+                                    title="Beneficios del Hierro Natural - BeetPower" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen>
+                            </iframe>
                         </div>
                         <button class="btn watch-video-btn" data-points="10">Ver Video</button>
                     </div>
-                    
-                    <div class="video-card">
-                        <h4>Beneficios del Hierro Natural <span class="points-badge">+8 puntos</span></h4>
-                        <p>Descubre por qué el hierro de BeetPower es más efectivo.</p>
-                        <div class="video-placeholder">
-                            [VIDEO INFORMATIVO - 3:45 min]
-                        </div>
-                        <button class="btn watch-video-btn" data-points="8">Ver Video</button>
-                    </div>
-                    
-                    <div class="video-card">
-                        <h4>Testimonios BeetPower <span class="points-badge">+5 puntos</span></h4>
-                        <p>Conoce las experiencias de nuestros clientes.</p>
-                        <div class="video-placeholder">
-                            [VIDEO TESTIMONIOS - 4:10 min]
-                        </div>
-                        <button class="btn watch-video-btn" data-points="5">Ver Video</button>
-                    </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="qr-code">
+        <div class="container">
+            <h2 class="section-title">Escanea y Visítanos</h2>
+            <div class="qr-section">
+                <div class="qr-code">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://beetpower.github.io&color=8B0000" 
+                         alt="QR Code BeetPower" 
+                         style="display: block;">
+                </div>
+                <p style="margin-top: 1rem; font-weight: bold; font-size: 1.1rem;">Escanea con tu celular para visitar nuestra página</p>
             </div>
         </div>
     </section>
@@ -642,7 +737,7 @@
         <div class="modal-content">
             <h2>¡Felicidades!</h2>
             <p>Has ganado un descuento especial para BeetPower.</p>
-            <div class="discount-code" id="discount-code">BEET20</div>
+            <div class="discount-code" id="discount-code">BEET15</div>
             <p>Usa este código al realizar tu compra online.</p>
             <button class="btn" id="close-modal">Cerrar</button>
         </div>
@@ -663,6 +758,9 @@
                 <div class="footer-section">
                     <h3>BeetPower</h3>
                     <p>Combatiendo la anemia en el Perú con bebidas naturales ricas en hierro.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/profile.php?id=61583249610862" target="_blank">📘 Facebook</a>
+                    </div>
                 </div>
                 
                 <div class="footer-section">
@@ -673,12 +771,10 @@
                 </div>
                 
                 <div class="footer-section">
-                    <h3>Síguenos</h3>
-                    <div class="social-links">
-                        <a href="#">📘</a>
-                        <a href="#">📷</a>
-                        <a href="#">📺</a>
-                    </div>
+                    <h3>Horario de Atención</h3>
+                    <p>Lunes a Viernes: 8:00 AM - 6:00 PM</p>
+                    <p>Sábados: 9:00 AM - 1:00 PM</p>
+                    <p>Domingos: Cerrado</p>
                 </div>
             </div>
             <p>&copy; 2023 BeetPower. Todos los derechos reservados.</p>
@@ -706,20 +802,20 @@
         const updatedPoints = document.getElementById('updated-points');
         const closePointsModal = document.getElementById('close-points-modal');
         
-        // Descuentos disponibles para la ruleta principal
+        // Descuentos disponibles para la ruleta principal (más realistas)
         const discounts = [
-            { text: '10% OFF', discount: 'BEET10', probability: 0.4 },
-            { text: '15% OFF', discount: 'BEET15', probability: 0.3 },
-            { text: '20% OFF', discount: 'BEET20', probability: 0.2 },
-            { text: '25% OFF', discount: 'BEET25', probability: 0.1 }
+            { text: '5% OFF', discount: 'BEET5', probability: 0.4 },
+            { text: '10% OFF', discount: 'BEET10', probability: 0.3 },
+            { text: '15% OFF', discount: 'BEET15', probability: 0.2 },
+            { text: '20% OFF', discount: 'BEET20', probability: 0.1 }
         ];
         
-        // Premios disponibles para la ruleta diaria
+        // Premios disponibles para la ruleta diaria (más realistas)
         const dailyPrizes = [
-            { text: '5 Puntos', points: 5, probability: 0.4 },
-            { text: '10 Puntos', points: 10, probability: 0.3 },
-            { text: '15 Puntos', points: 15, probability: 0.2 },
-            { text: '20 Puntos', points: 20, probability: 0.1 }
+            { text: '2 Puntos', points: 2, probability: 0.4 },
+            { text: '3 Puntos', points: 3, probability: 0.3 },
+            { text: '5 Puntos', points: 5, probability: 0.2 },
+            { text: '8 Puntos', points: 8, probability: 0.1 }
         ];
         
         // Estado del usuario
