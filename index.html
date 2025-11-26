@@ -550,14 +550,33 @@
         .qr-section {
             text-align: center;
             margin: 2rem 0;
+            padding: 2rem;
+            background-color: var(--light);
+            border-radius: 15px;
         }
         
         .qr-code {
             border: 3px solid var(--primary);
             border-radius: 10px;
-            padding: 10px;
+            padding: 15px;
             background: white;
             display: inline-block;
+            margin-bottom: 1rem;
+        }
+        
+        .qr-description {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .qr-description h3 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        .qr-description p {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
         }
         
         @media (max-width: 768px) {
@@ -670,16 +689,23 @@
         </div>
     </section>
 
+    <!-- SECCIÓN QR CORREGIDA -->
     <section id="qr-code">
         <div class="container">
-            <h2 class="section-title">Escanea y Visítanos</h2>
             <div class="qr-section">
+                <h2 class="section-title">Escanea y Visítanos</h2>
                 <div class="qr-code">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://beetpower.github.io&color=8B0000" 
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://broncospike.github.io/BeetPower.github.io/#inicio&color=8B0000&bgcolor=FFFFFF&margin=10" 
                          alt="QR Code BeetPower" 
                          style="display: block;">
                 </div>
-                <p style="margin-top: 1rem; font-weight: bold; font-size: 1.1rem;">Escanea con tu celular para visitar nuestra página</p>
+                <div class="qr-description">
+                    <h3>Accede Rápidamente a Nuestra Página</h3>
+                    <p>📱 <strong>Escanea este código QR con tu celular</strong></p>
+                    <p>➡️ Serás dirigido automáticamente a: <br>
+                    <strong>https://broncospike.github.io/BeetPower.github.io/#inicio</strong></p>
+                    <p>🎯 <em>Descubre todos nuestros productos, juegos y promociones exclusivas</em></p>
+                </div>
             </div>
         </div>
     </section>
